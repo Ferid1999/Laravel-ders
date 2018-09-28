@@ -11,4 +11,4 @@
 |
 */
 
-Route::get('/','Anasehifecontroller@index');
+Route::get('/','Anasehifecontroller@index')->name('anasehife');
