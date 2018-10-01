@@ -15,6 +15,7 @@ class CreateKategoriTable extends Migration
     {
         Schema::create('kategori', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('ust_id')->nullable();
             $table->string('kategori_adi',30);
             $table->string('slug',40);
             $table->timestamp("yaratma_tarixi")->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -32,5 +33,7 @@ class CreateKategoriTable extends Migration
     public function down()
     {
         Schema::dropIfExists('kategori');
+
     }
+
 }
