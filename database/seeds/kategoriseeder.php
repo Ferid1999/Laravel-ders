@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class kategoriseeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       $this->call(kategoriseeder::class);
-       
-    }
+        DB::table("kategori")->insert([
+          
+        'kategori_adi'=>'nns'
+       ]);    }
 }
