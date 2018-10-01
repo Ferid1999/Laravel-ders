@@ -12,6 +12,7 @@ class kategoriseeder extends Seeder
      */
     public function run()
     {
+        DB::table('kategori')->truncate();
         $id=DB::table("kategori")->insertGetId(['kategori_adi'=>'Elektronik','slug'=>'elekt']);   
         DB::table("kategori")->insert(['kategori_adi'=>'Bilgisayar/Tablet','slug'=>'tel','ust_id'=>$id]);
         DB::table("kategori")->insertGetId(['kategori_adi'=>'Kitab','slug'=>'nns']);   
