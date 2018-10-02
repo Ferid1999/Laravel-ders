@@ -17,7 +17,7 @@ class urunseeder extends Seeder
         	urun::create([
             'urun_adi'=>$urun_adi,
             'slug'=>str_slug($urun_adi),
-            'aciklama'=>$faker->sentences(5),
+            'aciklama'=>$faker->sentence(20),
             'fiyati'=>$faker->randomFloat(3,1,20)
 
         	]);
