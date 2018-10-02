@@ -28,14 +28,14 @@
                     <a href="#" class="btn btn-default">Yeni Ürünler</a>
                     <hr>
                     <div class="row">
-                        @foreach($urunler as $urun)
+                       @foreach($urunler as $urun)
                         <div class="col-md-3 product">
                             <a href="{{route('urun',$urun->slug)}}"><img src="http://lorempixel.com/400/400/food/1"></a>
                             <p><a href="{{route('urun',$urun->slug)}}">{{$urun->urun_adi}}</a></p>
                             <p class="price">{{$urun->fiyati}} ₺</p>
                             <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
                         </div>
-                        @endforeach
+                        @endforeach 
                     </div>
                 </div>
             </div>

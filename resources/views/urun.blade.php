@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 <div class="col-md-7">
-                    <h1>Ürün adı</h1>
-                    <p class="price">129 ₺</p>
+                    <h1>{{ $urun->urun_adi }}</h1>
+                    <p class="price">{{ $urun->fiyati}} ₺</p>
                     <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
                 </div>
             </div>
@@ -37,8 +37,10 @@
                     <li role="presentation"><a href="#t2" data-toggle="tab">Yorumlar</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="t1">t1</div>
-                    <div role="tabpanel" class="tab-pane" id="t2">t2</div>
+                    <div role="tabpanel" class="tab-pane active" id="t1">
+                        {{ $urun->aciklama}}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="t2">Yorum yoxdur...</div>
                 </div>
             </div>
 
