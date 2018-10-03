@@ -14,6 +14,8 @@
 Route::get('/','Anasehifecontroller@index')->name('anasehife');
 Route::get('/kategori/{slug_kategoriadi}', 'Kategoricontroller@index')->name('kategori');
 Route::get('/urun/{slug_urunadi}', 'Uruncontroller@index')->name('urun');
+Route::post('/ara','Uruncontroller@ara')->name('urun_ara');
+Route::get('/ara','Uruncontroller@ara')->name('urun_ara');
 Route::get('/sepet','Sepetcontroller@index')->name('sepet');
 Route::get('/odeme','Odemecontroller@index')->name('odeme');
 Route::get('/sifarisler','Sifarislercontroller@index')->name('sifarisler');

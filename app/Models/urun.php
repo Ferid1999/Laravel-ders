@@ -16,4 +16,9 @@ class urun extends Model
    public function kategoriler(){
         return $this->belongsToMany('App\Models\kategori','kategori_urun');
     }
+
+
+    public function detay(){
+        return $this->hasOne('App\Models\urundetay');
+    }
 }
