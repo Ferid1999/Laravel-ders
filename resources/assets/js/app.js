@@ -8,6 +8,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+setTimeout(function(){
+$('.alert').slideUp(500);
+},3000)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

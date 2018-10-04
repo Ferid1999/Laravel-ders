@@ -22,8 +22,15 @@ Route::get('/sifarisler','Sifarislercontroller@index')->name('sifarisler');
 Route::get('/sifarisler/{id}','Sifarislercontroller@detay')->name('sifaris');
 Route::group(['prefix'=>'kullanici'],function(){
 Route::get('/oturumac','Kullanicicontroller@giris_form')->name('kullanici.oturumac');
+Route::post('/oturumac','Kullanicicontroller@giris')->name('kullanici.oturumac');
 Route::get('/kaydol','Kullanicicontroller@kaydol_form')->name('kullanici.kaydol');
+Route::post('/kaydol','Kullanicicontroller@kaydol')->name('kullanici.kaydol');
+Route::get('/aktiflestir/{anahtar}','Kullanicicontroller@aktiflestir')->name('aktiflesdir');
 });
 
+Route::get('/test/mail',function(){
+	$kullanici=\App\Models\users::find(1);
+return new App\Mail\kullanicikayitmail($kullanici);
+});
 
 ?>
