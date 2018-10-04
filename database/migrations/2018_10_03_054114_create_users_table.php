@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('sifre',60);
             $table->string('aktivasyon_anahtari',60)->nullable();
             $table->boolean('aktif_mi')->default(0);
-
+            $table->rememberToken();
             $table->timestamp("yaratma_tarixi")->default(DB::raw('CURRENT_TIMESTAMP'));
              $table->timestamp("yenileme_tarixi")->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
              $table->timestamp("silinme_tarixi")->nullable();

@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\users;
-use Illuminate\Support\Facades\Hash;
+
 use Illuminate\Support\Str;
 use App\Mail\kullanicikayitmail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Auth;
+
 
 
 class Kullanicicontroller extends Controller
 {
    
+    
+    
+    
+     public function giris_form(){
+      return view('kullanici.oturumac');
+    }
+
+
     public function giris(){
 
        $this->validate(request(),[
@@ -28,12 +37,19 @@ class Kullanicicontroller extends Controller
     return back()->withErrors($errors);
    }
 }
-    
-    public function kaydol_form(){
-    	return view('kullanici.kaydol');
-    }
-     public function giris_form(){
-      return view('kullanici.oturumac');
+
+
+
+
+
+
+
+
+
+
+
+public function kaydol_form(){
+        return view('kullanici.kaydol');
     }
     public function kaydol(){
     	$this->validate(request(),[
@@ -68,4 +84,3 @@ class Kullanicicontroller extends Controller
         }
     }
 }
-?>
