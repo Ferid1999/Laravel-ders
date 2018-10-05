@@ -9,9 +9,9 @@ use Illuminate\Support\Str;
 use App\Mail\kullanicikayitmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use lluminate\Database\Eloquent\Model;
 
-
-
+use Illuminate\Support\Facades\Auth;
 class Kullanicicontroller extends Controller
 {
    
@@ -30,21 +30,13 @@ class Kullanicicontroller extends Controller
             'sifre'=>'required'
         ]);
    if(auth()->attempt(['email'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))){
-    reuest()->session()->regenerate();
+    request()->session()->regenerate();
     return redirect()->intended('/');
    }else{
     $errors=['email'=>'Hatali giris'];
     return back()->withErrors($errors);
    }
 }
-
-
-
-
-
-
-
-
 
 
 
@@ -82,5 +74,11 @@ public function kaydol_form(){
         else{
             return redirect()->to('/')->with('mesaj','Kullanici kaydi aktiflestirilemedi')->With('mesaj_tur','warning');
         }
+    }
+    public function oturumukapat(){
+        auth()->logout();
+        request()->session()->flush();
+        request()->session()-regenerate();
+        return redirect()->route('anasehife');
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Models\urun;
 use App\Models\urundetay;
+use Illuminate\Support\Facades\DB;
 class urunseeder extends Seeder
 {
     /**
