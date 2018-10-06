@@ -21,15 +21,23 @@
                 <tr>
                     <td style="width: 120px;"><a href="{{route('urun',$urunCartItem->options->slug)}}"> <img src="http://lorempixel.com/120/100/food/2"></a></td>
                     <td>
-                      <a href="{{route('urun',$urunCartItem->id)}}">
-                        {{$urunCartItem->name}}</a></td>
+                      <a href="{{route('urun',$urunCartItem->options->slug)}}">
+                        {{$urunCartItem->name}}</a>
+                     <form action="{{route('sepet.kaldir',$urunCartItem->rowId)}}" method="post">
+                        
+                         {{ csrf_field()}}
+                         {{ method_field('DELETE')}}
+                         <input type="submit"  class="btn btn-danger btn-xs" value="Sepetden kaldir">
+                     </form>
+                        
+                    </td>
                     <td>{{$urunCartItem->price}} Tl</td>
 
                     <td>
-                        <a href="#" class="btn btn-xs btn-default">-</a>
-                        <span style="padding: 10px 20px">1</span>                   {{$urunCartItem->qty}}
-
-                        <a href="#" class="btn btn-xs btn-default">+</a>
+                        <a href="/sepet" class="btn btn-xs btn-default urun-adet-azalt " data-id="{{$urunCartItem->rowId}}" data-adet="{{$urunCartItem->qty-1}}">-</a>
+                        <span style="padding: 10px 20px"> {{$urunCartItem->qty}}
+</span>                  
+                        <a href="/sepet" class="btn btn-xs btn-default urun-adet-artir" data-id="{{$urunCartItem->rowId}}" data-adet="{{$urunCartItem->qty+1}}">+</a>
                     </td>
                     <td class="text-right">{{$urunCartItem->subtotal}} Tl</td>
 
@@ -52,7 +60,13 @@
                 </tr>
             </table>
             <div>
-                <a href="#" class="btn btn-info pull-left">Sepeti Boşalt</a>
+                
+                <form action="{{route('sepet.bosalt')}}" method="post">
+                        
+                         {{ csrf_field()}}
+                         {{ method_field('DELETE')}}
+                         <input type="submit"  class="btn btn-info pull-left" value="Sepeti Boşalt">
+                     </form>
                 <a href="#" class="btn btn-success pull-right btn-lg">Ödeme Yap</a>
             </div>
             @else

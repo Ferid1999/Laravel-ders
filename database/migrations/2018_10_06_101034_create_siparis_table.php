@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSepetTable extends Migration
+class CreateSiparisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,23 @@ class CreateSepetTable extends Migration
      */
     public function up()
     {
-        Schema::create('sepet', function (Blueprint $table) {
+        Schema::create('sifaris', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kullanici_id')->unsigned();
-
+            $table->integer('sepet_id')->unsigned();
+            $table->decimal('siparis_tutari',5,4);
+            $table->string('durum',30)->nullable();
+            $table->string('banka',20)->nullable();
+            $table->integer('taksit_siyahisi')->nullable();
+            
             $table->timestamp("yaratma_tarixi")->default(DB::raw('CURRENT_TIMESTAMP'));
 
              $table->timestamp("yenileme_tarixi")->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
 
              $table->timestamp("silinme_tarixi")->nullable();
-             
-             $table->foreign('kullanici_id')->references('id')->on('kullanici')->onDelete('cascade');
+
+             $table->unique('sepet_id');
+             $table->foreign('sepet_id')->references('id')->on('sepet')->onDelete('cascade');
+           
         });
     }
 
@@ -34,6 +40,6 @@ class CreateSepetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sepet');
+        Schema::dropIfExists('sifaris');
     }
 }
