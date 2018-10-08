@@ -26,11 +26,12 @@ Route::patch('/guncelle/{rowid}','Sepetcontroller@guncelle')->name('sepet.guncel
 
 });
 
-
+Route::get('/odeme','Odemecontroller@index')->name('odeme');
+Route::post('/odeme','Odemecontroller@odemeyap')->name('odemeyap');
 
 
 Route::group(['middleware'=>'auth'],function(){
-Route::get('/odeme','Odemecontroller@index')->name('odeme');
+
 Route::get('/sifarisler','Sifarislercontroller@index')->name('sifarisler');
 Route::get('/sifarisler/{id}','Sifarislercontroller@detay')->name('sifaris');
 });

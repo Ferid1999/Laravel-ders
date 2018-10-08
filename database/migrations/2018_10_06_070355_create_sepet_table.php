@@ -19,7 +19,8 @@ class CreateSepetTable extends Migration
             $table->timestamp("yaratma_tarixi")->default(DB::raw('CURRENT_TIMESTAMP'));
              $table->timestamp("yenileme_tarixi")->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
              $table->timestamp("silinme_tarixi")->nullable();
-             $table->foreign('kullanici_id')->references('id')->on('kullanici')->onDelete('cascade');
+             
+             $table->foreign('kullanici_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

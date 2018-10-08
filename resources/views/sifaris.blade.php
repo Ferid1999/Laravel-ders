@@ -4,46 +4,31 @@
   <div class="container">
         <div class="bg-content">
             <h2>Sipariş (SP-00123)</h2>
+            @if(count($sifarisler)==0)
+            <p>Sifarisiniz yoxdu</p>
+            @else 
             <table class="table table-bordererd table-hover">
                 <tr>
-                    <th>Ürün</th>
+                    <th>Sifaris kodu</th>
                     <th>Tutar</th>
-                    <th>Adet</th>
-                    <th>Ara Toplam</th>
+                    <th>Toplam urun</th>
                     <th>Durum</th>
+                    <th></th>
                 </tr>
+               @foreach($sifarisler as $sifaris)
                 <tr>
-                    <td> <img src="http://lorempixel.com/120/100/food/2"> Ürün adı</td>
-                    <td>18.99</td>
-                    <td>1</td>
-                    <td>18.99</td>
+                    <td>SP-{{ $sifaris->id}} </td>
+                    <td>{{ $sifaris->sifaris_tutari*((100+config('cart.tax'))/100)}}</td>
+                    <td>{{$sifaris->sepet->sepet_urun_adet()}}</td>
+                    <td>{{$sifaris->durum}}</td>
                     <td>
-                        Sipariş alındı, <br> Onaylandı, <br> Kargoya verildi, <br> Bir sorun var. İletişime geçin!
+                        <a href="{{route('sifaris',$sifaris->id)}}" class="btn btm-sm btn-success">Detay</a>
                     </td>
                 </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Toplam Tutar (KDV Dahil)</th>
-                    <th>18.99</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Kargo</th>
-                    <th>Ücretsiz</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Sipariş Toplamı</th>
-                    <th>18.99</th>
-                    <th></th>
-                </tr>
+                
 
             </table>
+            @endif
         </div>
     </div>
 @endsection

@@ -26,4 +26,7 @@ class users extends Authenticatable
     public function getAuthPassword(){
         return $this->sifre;
     }
+    public function detay(){
+        return $this->hasOne('App\Models\kullanicidetay');
+    }
 }

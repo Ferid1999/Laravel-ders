@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\users;
+use App\Models\kullanicidetay;
+
 
 use Illuminate\Support\Str;
 use App\Mail\kullanicikayitmail;
@@ -14,9 +16,6 @@ use lluminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 class Kullanicicontroller extends Controller
 {
-   
-    
-    
     
      public function giris_form(){
       return view('kullanici.oturumac');
@@ -30,7 +29,13 @@ class Kullanicicontroller extends Controller
             'sifre'=>'required'
         ]);
    if(auth()->attempt(['email'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))){
+
     request()->session()->regenerate();
+    $aktif_sepet_id=sepet::aktif_sepet_id();
+    if(!is_null($aktif_sepet_id)){
+        $aktif_sepet=sepet::create(['kullanici_id'=>auth()->id()]);
+    }
+    session()->put('aktif_sepet_id',$aktif_sepet_id);
     return redirect()->intended('/');
    }else{
     $errors=['email'=>'Hatali giris'];
@@ -58,6 +63,7 @@ public function kaydol_form(){
 	    		'aktif_mi'=>0
     	]);
 
+    // $kullanici->detay()->save(new kullanicidetay());
     	Mail::to(request('email'))->send(new kullanicikayitmail($kullanici));
     	auth()->login($kullanici);
     	return redirect()->route('anasehife');
@@ -78,7 +84,7 @@ public function kaydol_form(){
     public function oturumukapat(){
         auth()->logout();
         request()->session()->flush();
-        request()->session()-regenerate();
+        request()->session()->regenerate();
         return redirect()->route('anasehife');
     }
 }

@@ -13,6 +13,7 @@ class CreateSepetUrunTable extends Migration
      */
     public function up()
     {
+
         Schema::create('sepet_urun', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sepet_id')->unsigned();
@@ -25,6 +26,7 @@ class CreateSepetUrunTable extends Migration
              $table->timestamp("yenileme_tarixi")->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
 
              $table->timestamp("silinme_tarixi")->nullable();
+             $table->unique('sepet_id','urun_id');
              $table->foreign('sepet_id')->references('id')->on('sepet')->onDelete('cascade');
              $table->foreign('urun_id')->references('id')->on('urun')->onDelete('cascade');
         });
@@ -37,6 +39,7 @@ class CreateSepetUrunTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sepet_urun');
+    Schema::dropIfExists('sepet_urun');
+
     }
 }

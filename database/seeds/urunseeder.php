@@ -14,8 +14,7 @@ class urunseeder extends Seeder
     public function run(Faker\Generator $faker)
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        urun::truncate();
-        urundetay::truncate();
+       
         for ($i=0; $i < 30; $i++) { 
         	$urun_adi=$faker->sentence(2);
         	$urun=urun::create([

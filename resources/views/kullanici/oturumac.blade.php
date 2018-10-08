@@ -1,12 +1,18 @@
 @extends('layouts.master')
 @section('title','Oturum')
 @section('content')
+@if(session()->has('mesaj'))
+<div class="container">
+    <div class="alert alert-{{ session('mesaj_tur')}}"> {{session('mesaj')}}</div>
+</div>
+@endif
  <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Oturum Aç</div>
                     <div class="panel-body">
+
                         <form class="form-horizontal" role="form" method="POST" action="{{route('kullanici.oturumac')}}">
                             {{ csrf_field()}}
                         
