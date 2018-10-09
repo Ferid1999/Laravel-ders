@@ -36,7 +36,10 @@
                         <ul class="dropdown-menu">
                             <li><a href="{{route('sifarisler')}}">Siparişlerim</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Çıkış</a></li>
+                            <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Çıkış</a></li>
+                            <form id="logout-form" action="{{route('kullanici.oturumukapat')}}" method="post" style="display: none;">
+                                {{csrf_field()}}
+                            </form>
                         </ul>
                     </li>
                     

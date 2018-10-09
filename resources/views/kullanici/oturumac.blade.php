@@ -14,9 +14,9 @@
                     <div class="panel-body">
 
                         <form class="form-horizontal" role="form" method="POST" action="{{route('kullanici.oturumac')}}">
-                            {{ csrf_field()}}
                         
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                             @include('layouts.partials.error')
                             <div class="form-group">
                                 <label for="email" class="col-md-4 control-label">Email</label>

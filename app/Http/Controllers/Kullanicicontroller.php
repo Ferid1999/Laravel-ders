@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\users;
+use App\Models\sepet;
 use App\Models\kullanicidetay;
 
 
@@ -63,7 +64,7 @@ public function kaydol_form(){
 	    		'aktif_mi'=>0
     	]);
 
-    // $kullanici->detay()->save(new kullanicidetay());
+    //$kullanici->detay()->save(new kullanicidetay());
     	Mail::to(request('email'))->send(new kullanicikayitmail($kullanici));
     	auth()->login($kullanici);
     	return redirect()->route('anasehife');

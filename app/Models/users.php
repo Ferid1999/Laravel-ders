@@ -21,7 +21,7 @@ class users extends Authenticatable
 
     
     protected $hidden = [
-        'sifre', 'aktivasyon_anahtari',
+        'sifre', 'aktivasyon_anahtari','remember_token'
     ];
     public function getAuthPassword(){
         return $this->sifre;

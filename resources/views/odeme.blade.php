@@ -4,7 +4,7 @@
  <div class="container">
         <div class="bg-content">
             <h2>Ödeme</h2>
-            <form action="{{ route('odemeyap')}}" method="post">
+        <form action="{{ route('odemeyap')}}" method="post">
                  {{ csrf_field()}}
             <div class="row">
                 <div class="col-md-5">
@@ -61,7 +61,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="adsoyad">Ad Soyad</label>
-                                <input type="text" class="form-control" name="adsoyad" id="adsoyad"  value="auth()->user()->adsoyad" required>
+                                <input type="text" class="form-control" name="adsoyad" id="adsoyad"  value="{{auth()->user()->adsoyad}}" required>
                             </div>
                         </div>
                         <div class="col-md-8">

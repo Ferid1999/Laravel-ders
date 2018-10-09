@@ -21,23 +21,23 @@ class Sepetcontroller extends Controller
     	$urun=urun::find(request('id'));
     	$uruncartItem=Cart::add($urun->id,$urun->urun_adi,1,$urun->fiyati,['slug'=>$urun->slug]);
         
-        /*if(auth()->check()){
+        if(auth()->check()){
         	$aktif_sepet_id=session('aktif_sepet_id');
         	if (!isset($aktif_sepet_id)) {
         		
-        	*/
+        	
         	$aktif_sepet=sepet::create([
         		'kullanici_id'=>2 //auth()->id()
         	]);
         	$aktif_sepet_id=$aktif_sepet->id;
-        	/*session()->put('$aktif_sepet_id',$aktif_sepet_id);
-        }*/
+        	session()->put('$aktif_sepet_id',$aktif_sepet_id);
+        }
         sepeturun::updateOrCreate(
            ['sepet_id'=>$aktif_sepet_id,'urun_id'=>$urun->id],
            ['adet'=>$uruncartItem->qty,'fiyati'=>$urun->fiyati,'durum'=>'Beklemede']
 
         );
-   // }
+    }
 
 
     	return redirect()->route('sepet')->with('mesaj_tur','success')->with('mesaj','Urun sepete eklendi');
@@ -45,11 +45,11 @@ class Sepetcontroller extends Controller
 
     public function kaldir($rowid){
     $aktif_sepet_id=1;
-    /*if(auth()->check()){
-        	$aktif_sepet_id=session('aktif_sepet_id');*/
+    if(auth()->check()){
+        	$aktif_sepet_id=session('aktif_sepet_id');
         	$cartItem=Cart::get($rowid);
         	sepeturun::where('sepet_id',$aktif_sepet_id)->where('urun_id',$cartItem->id)->delete();
-       // }
+        }
      Cart::remove($rowid);
      return redirect()->route('sepet')
      ->with('mesaj_tur','success')
@@ -58,10 +58,10 @@ class Sepetcontroller extends Controller
 
     public function bosalt(){
     	$aktif_sepet_id=1;
-   /*if(auth()->check()){
-        	$aktif_sepet_id=session('aktif_sepet_id');*/
+   if(auth()->check()){
+        	$aktif_sepet_id=session('aktif_sepet_id');
         	sepeturun::where('sepet_id',$aktif_sepet_id)->delete();
-       // }
+        }
      Cart::destroy();
      return redirect()->route('sepet')
      ->with('mesaj_tur','success')
@@ -80,14 +80,14 @@ class Sepetcontroller extends Controller
    return response()->json(['succes'=>false]);
     }
     $aktif_sepet_id=1;
-    /*if(auth()->check()){
-        	$aktif_sepet_id=session('aktif_sepet_id');*/
+    if(auth()->check()){
+        	$aktif_sepet_id=session('aktif_sepet_id');
         	$cartItem=Cart::get($rowid);
         	if (request('adet')==0)
                sepeturun::where('sepet_id',$aktif_sepet_id)->where('urun_id',$cartItem->id)->delete();
         		else
         	sepeturun::where('sepet_id',$aktif_sepet_id)->where('urun_id',$cartItem->id)->update(['adet'=>request('adet')]);
-       // }
+        }
 
    Cart::update($rowid,request('adet'));
    session()->flash('mesaj_tur','succes');
