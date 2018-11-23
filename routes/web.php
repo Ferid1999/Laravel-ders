@@ -10,7 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix'=>'yonetim','namespace'=>'yonetim'],function(){
+	Route::get('/', function () {
+    return redirect('/yonetim/oturumac');
+});
+	Route::match(['get','post'],'/oturumac','Kullanicicontroller@oturumac')->name('yonetim.oturumac');
+	Route::get('/oturumukapat','Kullanicicontroller@oturumukapat')->name('yonetim.oturumukapat');
 
+
+Route::group(['middleware'=>'yonetim'],function(){
+
+	Route::get('/anasehife','Anasehifecontroller@index')->name('yonetim.anasehife');
+});
+
+});
 Route::get('/','Anasehifecontroller@index')->name('anasehife');
 Route::get('/kategori/{slug_kategoriadi}', 'Kategoricontroller@index')->name('kategori');
 Route::get('/urun/{slug_urunadi}', 'Uruncontroller@index')->name('urun');

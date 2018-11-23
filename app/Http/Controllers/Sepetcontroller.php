@@ -27,7 +27,7 @@ class Sepetcontroller extends Controller
         		
         	
         	$aktif_sepet=sepet::create([
-        		'kullanici_id'=>2 //auth()->id()
+        		'kullanici_id'=>auth()->id()
         	]);
         	$aktif_sepet_id=$aktif_sepet->id;
         	session()->put('$aktif_sepet_id',$aktif_sepet_id);
