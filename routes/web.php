@@ -21,6 +21,18 @@ Route::group(['prefix'=>'yonetim','namespace'=>'yonetim'],function(){
 Route::group(['middleware'=>'yonetim'],function(){
 
 	Route::get('/anasehife','Anasehifecontroller@index')->name('yonetim.anasehife');
+
+
+	Route::group(['prefix'=>'kullanici'],function(){
+	Route::match(['get','post'],'/','Kullanicicontroller@index')->name('yonetim.kullanici');
+	Route::get('/yeni','Kullanicicontroller@form')->name('yonetim.kullanici.yeni');
+	Route::get('/duzenle{id}','Kullanicicontroller@form')->name('yonetim.kullanici.duzenle');
+	Route::get('/kaydet/{id?}','Kullanicicontroller@kaydet')->name('yonetim.kullanici.kaydet');
+	Route::get('/sil/{id}','Kullanicicontroller@sil')->name('yonetim.kullanici.sil');
+	
+
+
+});
 });
 
 });

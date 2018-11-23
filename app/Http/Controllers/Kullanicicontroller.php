@@ -29,7 +29,12 @@ class Kullanicicontroller extends Controller
             'email'=>'required|email',
             'sifre'=>'required'
         ]);
-   if(auth()->attempt(['email'=>request('email'),'password'=>request('sifre')],request()->has('benihatirla'))){
+       $credentials=[
+        'email'=>request('email'),
+        'password'=>request('sifre'),
+        'aktif_mi'=>1
+    ];
+   if(auth()->attempt($credentials,request()->has('benihatirla'))){
 
     request()->session()->regenerate();
     $aktif_sepet_id=sepet::aktif_sepet_id();

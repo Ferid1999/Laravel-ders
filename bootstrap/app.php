@@ -11,10 +11,10 @@
 |
 */
 
+
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
-
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
