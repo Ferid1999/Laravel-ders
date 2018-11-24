@@ -12,7 +12,7 @@ class Anasehifecontroller extends Controller
 {
     public function index(){
 
-    	$kategoriler=kategori::WhereRaw('ust_id is null')->get();
+    	$kategoriler=kategori::WhereNULL('ust_id')->get();
     	$urunler_slider=urundetay::with('urun')->where('goster_slider',1)->take(5)->get();
     	$urun_gunun_firsati=urun::select('urun.*')->join('urun_detay','urun_detay.urun_id','urun.id')->where('urun_detay.goster_gunun_firsati',1)->orderBy('yenileme_tarixi','desc')->first();
     	$urunler_one_cikan=urundetay::with('urun')->where('goster_one_cikan',1)->take(4)->get();

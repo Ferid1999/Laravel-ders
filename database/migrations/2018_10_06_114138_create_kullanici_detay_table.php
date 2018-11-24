@@ -15,11 +15,11 @@ class CreateKullaniciDetayTable extends Migration
     {
         Schema::create('kullanici_detay', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kullanici_id')->unsigned();
+            $table->integer('users_id')->unsigned();
             $table->string('adres',200)->nullable();
             $table->string('telefon',15)->nullable();
             $table->string('ceptelefon',15)->nullable();
-            $table->foreign('kullanici_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

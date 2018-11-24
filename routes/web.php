@@ -27,9 +27,18 @@ Route::group(['middleware'=>'yonetim'],function(){
 	Route::match(['get','post'],'/','Kullanicicontroller@index')->name('yonetim.kullanici');
 	Route::get('/yeni','Kullanicicontroller@form')->name('yonetim.kullanici.yeni');
 	Route::get('/duzenle{id}','Kullanicicontroller@form')->name('yonetim.kullanici.duzenle');
-	Route::get('/kaydet/{id?}','Kullanicicontroller@kaydet')->name('yonetim.kullanici.kaydet');
-	Route::get('/sil/{id}','Kullanicicontroller@sil')->name('yonetim.kullanici.sil');
+	Route::match(['get','post'],'/kaydet/{id?}','Kullanicicontroller@kaydet')->name('yonetim.kullanici.kaydet');
+	Route::match(['get','post'],'/sil/{id}','Kullanicicontroller@sil')->name('yonetim.kullanici.sil');
+
+});
 	
+	Route::group(['prefix'=>'kategori'],function(){
+	Route::match(['get','post'],'/','Kategoricontroller@index')->name('yonetim.kategori');
+	Route::get('/yeni','Kategoricontroller@form')->name('yonetim.kategori.yeni');
+	Route::get('/duzenle{id}','Kategoricontroller@form')->name('yonetim.kategori.duzenle');
+	Route::match(['get','post'],'/kaydet/{id?}','Kategoricontroller@kaydet')->name('yonetim.kategori.kaydet');
+	Route::match(['get','post'],'/sil/{id}','Kategoricontroller@sil')->name('yonetim.kategori.sil');
+
 
 
 });

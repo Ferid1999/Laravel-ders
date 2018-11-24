@@ -15,7 +15,7 @@
                         }}</h2>
                        @include('layouts.partials.error')
 
-                                          @if(session()->has('mesaj'))
+                 @if(session()->has('mesaj'))
                     <div class="container">
                         <div class="alert alert-{{ session('mesaj_tur')}}"> {{session('mesaj')}}</div>
                     </div>
@@ -24,13 +24,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="adsoyad">Ad Soyad</label>
-                                <input type="text" class="form-control" id="adsoyad" placeholder="Ad Soyad"  name="adsoyad" value="{{ $entry->adsoyad}}">
+                                <input type="text" class="form-control" id="adsoyad" placeholder="Ad Soyad"  name="adsoyad" value="{{ old('adsoyad',$entry->adsoyad)}}">
                             </div>
                         </div>
                          <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="Email" name="email"  value="{{ $entry->email}}">
+                                <input type="email" class="form-control" id="email" placeholder="Email" name="email"  value="{{ old('email', $entry->email)}}">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -44,7 +44,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="adres">Adres</label>
-                                <input type="text" class="form-control" id="adres" placeholder="Adres" name="adres"  value="{{ $entry->detay->adres}}"
+                                <input type="text" class="form-control" id="adres" placeholder="Adres" name="adres"  value="{{ old('adres',$entry->detay->adres)}}"
                             </div>
                         </div>
                     </div>
@@ -52,26 +52,28 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="telefon">Telefon</label>
-                                <input type="text" class="form-control" id="telefon" placeholder="Telefon" name="telefon"  value="{{ $entry->detay->telefon}}">
+                                <input type="text" class="form-control" id="telefon" placeholder="Telefon" name="telefon"  value="{{ old('telefon',$entry->detay->telefon)}}">
                             </div>
                         </div>
                     
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="ceptelefonu">Cep telefonu</label>
-                                <input type="text" class="form-control" id="ceptelefonu" placeholder="Cep telefonu" name="ceptelefon"  value="{{ $entry->detay->ceptelefon}}">
+                                <input type="text" class="form-control" id="ceptelefonu" placeholder="Cep telefonu" name="ceptelefon"  value="{{ old('ceptelefon',$entry->detay->ceptelefon)}}">
                             </div>
                         </div>
                     </div>
                     
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="aktif_mi" value="1" {{ $entry->aktif_mi ? 'checked':' '}} >Aktif Mi
+                            <input type="hidden" name="aktif_mi" value="0">
+                            <input type="checkbox" name="aktif_mi" value="1" {{ old('aktif_mi',$entry->aktif_mi) ? 'checked' : ' '}} >Aktif Mi
                         </label>
                     </div>
                      <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="yonetici_mi" value="1" {{ $entry->yonetici_mi ? 'checked':' '}}>Yonetici Mi
+                             <input type="hidden" name="yonetici_mi" value="0">
+                            <input type="checkbox" name="yonetici_mi" value="1" {{ old('yonetici_mi',$entry->yonetici_mi) ? 'checked' : ' '}} >Yonetici Mi
                         </label>
                     </div>
                     

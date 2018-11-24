@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Models\users;
+use App\Models\kullanicidetay;
 use Hash;
 class Kullanicicontroller extends Controller{
 
@@ -44,7 +45,16 @@ class Kullanicicontroller extends Controller{
 
     public function index()
     {
-        $list=users::orderBy('yaratma_tarixi')->paginate(8);
+        if(request()->has('aranan')){
+            request()->flash();
+            $aranan=request('aranan');
+            $list=users::where('adsoyad','like',"%$aranan%")
+            ->orWhere('email','like',"%$aranan%")
+            ->orderByDesc('yaratma_tarixi')->paginate(8);
+        }
+        else{
+        $list=users::orderByDesc('yaratma_tarixi')->paginate(8);
+        }
         return view('yonetim.kullanici.index',compact('list'));
     }
     public function form($id=0){
@@ -52,36 +62,58 @@ class Kullanicicontroller extends Controller{
           if ($id>0) {
               $entry=users::find($id);
           }
-          return view('yonetim.kullanici.form',compact('entry'));
-    }
-     public function kaydet($id=0){
+          return view('yonetim.kullanici.form',compact('entry')); }
+
+    public function kaydet($id=0) {
         $this->validate(request(),[
             'adsoyad'=>'required',
             'email'=> 'required|email'
         ]);
          $data=request()->only('adsoyad','email');
 
-         if (request()->filled('sifre')) {
+         if (request()->has('sifre')) {
              $data['sifre']=Hash::make(request('sifre'));
          }
          
-          $data['aktif_mi']=request()->has('aktif_mi') ? 1 : 0;
+          $data['yonetici_mi']=request()->has('yonetici_mi') && request('yonetici_mi')==1 ? 1 : 0;
+          $data['aktif_mi']=request()->has('aktif_mi') && request('aktif_mi')==1 ? 1 : 0;
            
-          $data['yonetici_mi']=request()->has('yonetici_mi') ? 1 : 0;
+         
 
         if($id>0){
-          $entry=users::where('id','$id')->firstOrFail();
+          $entry=users::where('id',$id)->firstOrFail();
 
           $entry->update($data);
 
+
+         
+
          }        
         else{
+
             $entry=users::create($data);
         }
-        return retirect()
-        ->route('yonetim.kullanici.duzenle',$entry->id)
-        ->with('mesaj',($id>0 ? 'Guncellendi' : 'Kaydedildi'))
-        ->with('mesaj_tur','succes');
-    }
 
+        kullanicidetay::updateorCreate(
+                 ['users_id'=>$entry->id],
+                 [
+                    
+                    'adres'=>request('adres'),
+                    'telefon'=>request('telefon'),
+                    'ceptelefon'=>request('ceptelefon')
+                 ]
+
+
+
+          );
+
+        return redirect()->route('yonetim.kullanici.duzenle',$entry->id)->with('mesaj',($id>0 ? 'Guncellendi' : 'Kaydedildi'))->With('mesaj_tur','succes');
+    }
+   public  function sil($id){
+
+    users::destroy($id);
+
+    return redirect()
+    ->route('yonetim.kullanici')->with('mesaj','kayit silindi')->With('mesaj_tur','succes');
+   }
 }

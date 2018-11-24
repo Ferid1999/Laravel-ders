@@ -17,7 +17,8 @@ class users extends Authenticatable
     const UPDATED_AT="yenileme_tarixi";
     const DELETED_AT="silinme_tarixi";
     protected $fillable = [
-        'adsoyad', 'email', 'sifre','aktivasyon_anahtari','aktif_mi'
+        'adsoyad', 'email', 'sifre','aktivasyon_anahtari','aktif_mi','yonetici_mi
+ '
     ];
 
     
@@ -28,6 +29,6 @@ class users extends Authenticatable
         return $this->sifre;
     }
     public function detay(){
-        return $this->hasOne('App\Models\kullanicidetay');
+        return $this->hasOne('App\Models\kullanicidetay')->withDefault();
     }
 }
