@@ -19,6 +19,6 @@ class urun extends Model
 
 
     public function detay(){
-        return $this->hasOne('App\Models\urundetay');
+        return $this->hasOne('App\Models\urundetay')->withDefault();
     }
 }

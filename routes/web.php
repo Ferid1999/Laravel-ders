@@ -38,11 +38,19 @@ Route::group(['middleware'=>'yonetim'],function(){
 	Route::get('/duzenle{id}','Kategoricontroller@form')->name('yonetim.kategori.duzenle');
 	Route::match(['get','post'],'/kaydet/{id?}','Kategoricontroller@kaydet')->name('yonetim.kategori.kaydet');
 	Route::match(['get','post'],'/sil/{id}','Kategoricontroller@sil')->name('yonetim.kategori.sil');
+	
+});
+	Route::group(['prefix'=>'urun'],function(){
+	Route::match(['get','post'],'/','Uruncontroller@index')->name('yonetim.urun');
+	Route::get('/yeni','Uruncontroller@form')->name('yonetim.urun.yeni');
+	Route::get('/duzenle{id}','Uruncontroller@form')->name('yonetim.urun.duzenle');
+	Route::match(['get','post'],'/kaydet/{id?}','Uruncontroller@kaydet')->name('yonetim.urun.kaydet');
+	Route::match(['get','post'],'/sil/{id}','Uruncontroller@sil')->name('yonetim.urun.sil');
 
 
 
 });
-});
+	});
 
 });
 Route::get('/','Anasehifecontroller@index')->name('anasehife');

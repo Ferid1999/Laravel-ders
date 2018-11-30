@@ -12,7 +12,7 @@ class Kategoricontroller extends Controller
     	$order=request('order');
     	if ($order=='coksatanlar') {
     		
-    		$urunler=$kategori->urunler()->distinct()->join('urun_detay','urun_detay.urun_id','urun.id')->orderBy('urun_detay.goster_cok_satan','desc')->paginate(8);
+    		$urunler=$kategori->urunler()->distinct()->join('urun_detay','urun_detay.urun_id','urun.id')->orderBy('urun_detay.goster_cok_satan','desc')->paginate(3);
     	}else if($order=='yeni'){
 
     		$urunler=$kategori->urunler()->orderBy('yenileme_tarixi','desc')->paginate(3);

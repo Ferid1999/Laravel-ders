@@ -10,17 +10,21 @@ class Kategoricontroller extends Controller
 {
      public function index()
     {
-        if(request()->has('aranan')){
+        if(request()->has('aranan') || request()->has('ust_id')){
             request()->flash();
             $aranan=request('aranan');
-            $list=kategori::where('kategori_adi','like',"%$aranan%")
-            
-            ->orderByDesc('yaratma_tarixi')->paginate(8)->appends('aranan',$aranan);
+            $ust_id=request('ust_id');
+            $list=kategori::with('ust_kategori')
+            ->where('kategori_adi','like',"%$aranan%")
+            ->where('ust_id','like',$ust_id)
+            ->orderByDesc('id')->paginate(2)->appends(['aranan'=>$aranan,'ust_id'=>$ust_id]);
         }
         else{
-        $list=kategori::orderByDesc('yaratma_tarixi')->paginate(8);
+        	request()->flush();
+        $list=kategori::with('ust_kategori')->orderByDesc('id')->paginate(8);
         }
-        return view('yonetim.kategori.index',compact('list'));
+        $anakategoriler=kategori::WhereNULL('ust_id')->get();
+        return view('yonetim.kategori.index',compact('list','anakategoriler'));
     }
     public function form($id=0){
         $entry=new kategori;

@@ -40,6 +40,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if(count($list)==0)
+                            <tr><td colspan="6" class="text-center">Kayit bulunamadi</td></tr>
+                            @endif
                             @foreach($list as $entry)
                             <tr>
                                 <td>{{ $entry->id}}</td>

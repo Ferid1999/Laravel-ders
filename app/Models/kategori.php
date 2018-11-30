@@ -17,4 +17,12 @@ class kategori extends Model
     public function urunler(){
     	return $this->belongsToMany('App\Models\urun','kategori_urun');
     }
+
+    public function ust_kategori(){
+
+    	return $this->belongsTo('App\Models\kategori','ust_id')->withDefault([
+    		'kategori_adi'=>'Ana kategori'
+
+         ]);
+    }
 }
