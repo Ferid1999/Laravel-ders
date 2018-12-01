@@ -30,6 +30,7 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
+                                <th>Resim</th>
                                 <th>Slug</th>
                                 <th>urun adi</th>
                                 <th>Fiyati</th> 
@@ -44,7 +45,9 @@
                             @endif
                             @foreach($list as $entry)
                             <tr>
+
                                 <td>{{ $entry->id}}</td>
+                                <td> <img src="{{ $entry->detay->urun_resmi !=null ? asset('uploads/urunler/'.$entry->detay->urun_resmi): '\uploads\urunler\2-1543667848.jpeg'}}" class="img-responsive" style="width: 120px;"></td>
                                 <td>{{ $entry->slug}}</td>
                                 <td>{{ $entry->urun_adi}}</td>
                                 <td>{{ $entry->fiyati}}</td>

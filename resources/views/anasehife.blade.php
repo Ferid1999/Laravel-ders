@@ -50,7 +50,7 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="{{ route('urun',$urun_gunun_firsati->slug)}}">
-                            <img src="http://lorempixel.com/400/485/food/1" class="img-responsive">
+                            <img src="{{ $urun_gunun_firsati->detay->urun_resmi!=null ? asset('uploads/urunler/'.$urun_gunun_firsati->detay->urun_resmi): 'http://lorempixel.com/400/400/food/1'}}" class="img-responsive" style="min-width: 100%;">
                             {{
                                 $urun_gunun_firsati->urun_adi
                             }}
@@ -68,7 +68,10 @@
                     <div class="row">
                         @foreach($urunler_one_cikan as $urun_detay)
                         <div class="col-md-3 product">
-                            <a href="{{ route('urun',$urun_detay->urun->slug)}}"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="{{ route('urun',$urun_detay->urun->slug)}}">
+                                <img src="{{ $urun_detay->urun_resmi !=null ? asset('uploads/urunler/'.$urun_detay->urun_resmi): 'http://lorempixel.com/400/400/food/1'}}" class="img-responsive" style="min-width: 100%;">
+
+                            </a>
                             <p><a href="{{ route('urun',$urun_detay->urun->slug)}}">{{$urun_detay->urun->urun_adi}}</a></p>
                             <p class="price">{{$urun_detay->urun->fiyati}} ₺</p>
                         </div>
@@ -85,7 +88,7 @@
                     <div class="row">
                         @foreach($urunler_cok_satan as $urun_detay)
                         <div class="col-md-3 product">
-                            <a href="{{ route('urun',$urun_detay->urun->slug)}}"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="{{ route('urun',$urun_detay->urun->slug)}}"><img src="{{ $urun_detay->urun_resmi !=null ? asset('uploads/urunler/'.$urun_detay->urun_resmi): 'http://lorempixel.com/400/400/food/1'}}" class="img-responsive" style="min-width: 100%;"></a>
                             <p><a href="{{ route('urun',$urun_detay->urun->slug)}}">{{$urun_detay->urun->urun_adi}}</a></p>
                             <p class="price">{{$urun_detay->urun->fiyati}} ₺</p>
                         </div>
@@ -101,7 +104,7 @@
                     <div class="row">
                         @foreach($urunler_indirimli as $urun_detay)
                         <div class="col-md-3 product">
-                            <a href="{{ route('urun',$urun_detay->urun->slug)}}"><img src="http://lorempixel.com/400/400/food/1"></a>
+                            <a href="{{ route('urun',$urun_detay->urun->slug)}}"><img src="{{ $urun_detay->urun_resmi !=null ? asset('uploads/urunler/'.$urun_detay->urun_resmi): 'http://lorempixel.com/400/400/food/1'}}" class="img-responsive" style="min-width: 100%;"></a>
                             <p><a href="{{ route('urun',$urun_detay->urun->slug)}}">{{$urun_detay->urun->urun_adi}}</a></p>
                             <p class="price">{{$urun_detay->urun->fiyati}} ₺</p>
                         </div>
