@@ -50,6 +50,16 @@ Route::group(['middleware'=>'yonetim'],function(){
 
 
 });
+	Route::group(['prefix'=>'sifaris'],function(){
+	Route::match(['get','post'],'/','Sifariscontroller@index')->name('yonetim.sifaris');
+	Route::get('/yeni','Sifariscontroller@form')->name('yonetim.sifaris.yeni');
+	Route::get('/duzenle{id}','Sifariscontroller@form')->name('yonetim.sifaris.duzenle');
+	Route::match(['get','post'],'/kaydet/{id?}','Sifariscontroller@kaydet')->name('yonetim.sifaris.kaydet');
+	Route::match(['get','post'],'/sil/{id}','Sifariscontroller@sil')->name('yonetim.sifaris.sil');
+
+
+
+});
 	});
 
 });

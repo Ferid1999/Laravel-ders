@@ -15,7 +15,7 @@ class CreateSepetTable extends Migration
     {
         Schema::create('sepet', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kullanici_id');
+            $table->integer('users_id');
             $table->timestamp("yaratma_tarixi")->default(DB::raw('CURRENT_TIMESTAMP'));
              $table->timestamp("yenileme_tarixi")->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
              $table->timestamp("silinme_tarixi")->nullable();

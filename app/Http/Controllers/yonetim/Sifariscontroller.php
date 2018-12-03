@@ -7,37 +7,41 @@ use App\Http\Controllers\Controller;
 use App\Models\urun;
 use App\Models\kategori;
 use App\Models\urundetay;
+use App\Models\sifaris;
+use App\Models\sepet;
 
 
-class Uruncontroller extends Controller
+
+
+class Sifariscontroller extends Controller
 {
     public function index()
     {
         if(request()->has('aranan')){
            request()->flash();
             $aranan=request('aranan');
-            $list=sifaris::where('urun_adi','like',"%$aranan%")
-            ->orWhere('aciklama','like',"%$aranan%")
-            ->orderByDesc('yaratma_tarixi')->paginate(8)->appends('aranan',$aranan);
+            $list=sifaris::with('sepet.users')->where('adsoyad','like',"%$aranan%")
+            ->orWhere('id',$aranan)
+            ->orderByDesc('id')->paginate(8)->appends('aranan',$aranan);
+            
         }
         else{
-        
-          $list=urun::orderByDesc('yaratma_tarixi')->paginate(8);
+        $list=sifaris::orderByDesc('id')->paginate(8);
         }
-        return view('yonetim.urun.index',compact('list'));
+        return view('yonetim.sifaris.index',compact('list'));
     }
     public function form($id=0){
 
-        $entry=new urun;
+        
 
-        $urun_kategorileri=[];
+        
 
           if ($id>0) {
-              $entry=urun::find($id);
-              $urun_kategorileri=$entry->kategoriler()->pluck('kategori_id')->all();
+              $entry=sifaris::with('sepet.sepet_urunler.urun')->find($id);
+              
           }
-          $kategoriler=kategori::all();
-          return view('yonetim.urun.form',compact('entry','kategoriler','urun_kategorileri')); }
+         
+          return view('yonetim.sifaris.form',compact('entry')); }
 
     public function kaydet($id=0) {
         $data=request()->only('urun_adi','slug','aciklama','fiyati');

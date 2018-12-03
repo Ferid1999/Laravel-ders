@@ -14,4 +14,7 @@ class sepeturun extends Model
     const CREATED_AT="yaratma_tarixi";
     const UPDATED_AT="yenileme_tarixi";
     const DELETED_AT="silinme_tarixi";
+     public function urun(){
+        return $this->belongsTo('App\Models\urun');
+    }
 }

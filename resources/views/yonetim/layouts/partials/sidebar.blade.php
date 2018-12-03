@@ -18,6 +18,10 @@
                         <span class="fa fa-fw fa-dashboard"></span> Kullanicilar
                         <span class="badge badge-dark badge-pill pull-right">14</span>
                     </a>
+                    <a href="{{ route('yonetim.sifaris')}}" class="list-group-item">
+                        <span class="fa fa-fw fa-dashboard"></span> Sifarisler
+                        <span class="badge badge-dark badge-pill pull-right">14</span>
+                    </a>
                     <a href="#" class="list-group-item">
                         <span class="fa fa-fw fa-dashboard"></span> Orders
                         <span class="badge badge-dark badge-pill pull-right">14</span>

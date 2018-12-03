@@ -27,7 +27,7 @@ class sepet extends Model
     public static function aktif_sepet_id(){
     	 $aktif_sepet=DB::table('sepet as s')
     	 ->leftJoin('sifaris as si','si.sepet_id','=','s.id')
-    	 ->where('s.kullanici_id',auth()->id())
+    	 ->where('s.users_id',auth()->id())
     	 ->whereRaw('si.id is null')
     	 ->orderByDesc('s.yaratma_tarixi')
     	 ->select('s.id')->first();
@@ -35,5 +35,8 @@ class sepet extends Model
     }
     public function sepet_urun_adet(){
     	return DB::table('sepet_urun')->where('sepet_id',$this->id)->sum('adet');
+    }
+      public function users(){
+        return $this->belongsTo('App\Models\users');
     }
 }
