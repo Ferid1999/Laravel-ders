@@ -16,7 +16,7 @@ class Sifarislercontroller extends Controller
     	
     	$sifarisler=sifaris::with('sepet')->
     	whereHas('sepet',function($query){
-    		$query->where('kullanici_id',auth()->id());
+    		$query->where('users_id',auth()->id());
     	})
     	->orderByDesc('yaratma_tarixi')->get();
 
@@ -25,7 +25,7 @@ class Sifarislercontroller extends Controller
     public function detay($id){
     	$sifaris=sifaris::with('sepet.sepet_urunler.urun')->
     	whereHas('sepet',function(){
-    		$query->where('kullanici_id',auth()->id());
+    		$query->where('users_id',auth()->id());
     	})->
     	where('sifaris.id',$id)->firstOrFail();
     	return view('sifaris');

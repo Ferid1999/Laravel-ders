@@ -8,7 +8,7 @@ class sifaris extends Model
 {
     use SoftDeletes;
     protected $table="sifaris";
-    protected $fillable=['sepet_id','siparis_tutari','durum','adsoyad','adres','telefon','ceptelefonu','banka','taksit_sayisi'];
+    protected $fillable=['sepet_id','siparis_tutari','durum','adsoyad','adres','telefon','ceptelefon','banka','taksit_sayisi'];
 
      const CREATED_AT="yaratma_tarixi";
     const UPDATED_AT="yenileme_tarixi";

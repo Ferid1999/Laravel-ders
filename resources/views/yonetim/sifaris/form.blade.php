@@ -45,7 +45,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="ceptelefon"> Cep Telefonu</label>
-                                <input class="form-control" id="ceptelefon" placeholder="Cep Telefonu"  name="ceptelefon" value="{{ old('ceptelefon',$entry->ceptelefon)}}" >
+                                <input class="form-control" id="ceptelefon" placeholder="Cep Telefonu"  name="ceptelefon" value="{{ old('ceptelefon',$entry->ceptelefon)}}">
                             </div>
                         </div>
                     </div>
@@ -76,5 +76,42 @@
                     
                       
                 </form>
+                <h3>Sipariş (SP-{{$entry->id}})</3>
+            
+            <table class="table table-bordererd table-hover">
+                <tr>
+                    <th colspan="2">Urun</th>
+                    <th>Tutar</th>
+                    <th>Adet</th>
+                    <th>Ara Toplam</th>
+                    <th>Durum</th>
+                </tr>
+                @foreach($entry->sepet->sepet_urunler as $sepet_urun)
+                <tr>
+                    <td style="width: 120px"><a href="{{route('urun',$sepet_urun->urun->slug)}}"><img src="{{ $sepet_urun->urun->detay->urun_resmi!=null ? asset('uploads/urunler/'.$sepet_urun->urun->detay->urun_resmi): 'http://lorempixel.com/400/400/food/1'}}" class="img-responsive" style="width: 200px;"></a></td>
+                    <td><a href="{{route('urun',$sepet_urun->urun->slug)}}">{{$sepet_urun->urun->urun_adi}}</a></td>
+                    <td>{{$sepet_urun->fiyati}}</td>
+                    <td>{{$sepet_urun->adet}}</td>
+                    <td>{{$sepet_urun->fiyati*$sepet_urun->adet}}</td>
+                    <td>
+                       {{$sepet_urun->durum}}
+                    </td>
+                    
+                </tr>
+                @endforeach
+
+                <tr>
+                    <th colspan="4" class="text-right">Toplam tutar</th>
+                    <td colspan="4">{{$entry->siparis_tutari}}</td>
+                </tr>
+                 <tr>
+                    <th colspan="4" class="text-right">Toplam tutar(KDV'li)</th>
+                    <td colspan="4">{{ $entry->sifaris_tutari*((100+config('cart.tax'))/100)}}</td>
+                </tr>
+                 <tr>
+                    <th colspan="4" class="text-right">Siparis durum</th>
+                    <td colspan="4">{{$entry->durum}}</td>
+                </tr>
+            </table>
 
 @endsection()

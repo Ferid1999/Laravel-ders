@@ -39,7 +39,7 @@ class Kullanicicontroller extends Controller
     request()->session()->regenerate();
     $aktif_sepet_id=sepet::aktif_sepet_id();
     if(!is_null($aktif_sepet_id)){
-        $aktif_sepet=sepet::create(['kullanici_id'=>auth()->id()]);
+        $aktif_sepet=sepet::create(['users_id'=>auth()->id()]);
     }
     session()->put('aktif_sepet_id',$aktif_sepet_id);
     return redirect()->intended('/');

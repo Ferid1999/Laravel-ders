@@ -4,11 +4,8 @@ namespace App\Http\Controllers\yonetim;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\urun;
-use App\Models\kategori;
-use App\Models\urundetay;
+
 use App\Models\sifaris;
-use App\Models\sepet;
 
 
 
@@ -44,75 +41,39 @@ class Sifariscontroller extends Controller
           return view('yonetim.sifaris.form',compact('entry')); }
 
     public function kaydet($id=0) {
-        $data=request()->only('urun_adi','slug','aciklama','fiyati');
-       if (!request()->has('slug')){
-       	 $data['slug']=str_slug(request('urun_adi'));
-       	 request()->merge(['slug'=>$data['slug']]);
-       }
+        
+       
          $this->validate(request(),[
-            'urun_adi'=>'required',
-            'fiyati'=>'required',
-            'slug'        =>(request('orijinal_slug') != request('slug') ?  'unique:urun,slug' : '')
+            'adsoyad'=>'required',
+            'adres'=>'required',
+            'telefon'=>'required',
+            'durum'=>'required'
             
         ]);
        
+       $data=request()->only('adsoyad','adres','telefon','ceptelefon','durum');
        
-       $data_detay=request()->only('goster_slider','goster_gunun_firsati','goster_one_cikan','goster_cok_satan','goster_indirimli');
-       $kategoriler=request('kategoriler');
 
         if($id>0){
-          $entry=urun::where('id',$id)->firstOrFail();
+          $entry=sifaris::where('id',$id)->firstOrFail();
 
           $entry->update($data);
 
 
-         $entry->detay()->update($data_detay);
-
-          $entry->kategoriler()->sync($kategoriler);
 
          }        
-        else{
-
-            $entry=urun::create($data);
-            $entry->detay()->create($data_detay);
-            $entry->kategoriler()->attach($kategoriler);
-        }
+        
          
-         if (request()->hasFile('urun_resmi')) {
-         	
-         	$this->validate(request(),[
-         		'urun_resmi'=>'image|mimes:jpg,png,jpeg,gif|max:2048'
-         	]);
-         	$urun_resmi=request()->file('urun_resmi');
-         	$urun_resmi=request()->urun_resmi;
-
-         	$dosyaadi=$entry->id ."-" .time() ."." .$urun_resmi->extension();
-         	//$dosyaadi=$urun_resmi->getClientOriginalName;
-         	//$dosyaadi=$urun_resmi->hashName();
-         	
-         	if ($urun_resmi->isValid()) {
-         		$urun_resmi->move('uploads/urunler',$dosyaadi);
-         		urundetay::updateOrCreate(
-         			['urun_id' => $entry->id],
-         			['urun_resmi'=> $dosyaadi]
-
-         		);
-         	}
-
-
-         }
+        
        
 
-        return redirect()->route('yonetim.urun.duzenle',$entry->id)->with('mesaj',($id>0 ? 'Guncellendi' : 'Kaydedildi'))->With('mesaj_tur','succes');
+        return redirect()->route('yonetim.sifaris.duzenle',$entry->id)->with('mesaj',($id>0 ? 'Guncellendi' : 'Kaydedildi'))->With('mesaj_tur','succes');
     }
    public  function sil($id){
 
         
-        $urun=urun::find($id);
-         $urun->kategoriler()->detach();
-         
-         $urun->delete();
+        sifaris::destroy($id);
         return redirect()
-        ->route('yonetim.urun')->with('mesaj','kayit silindi')->With('mesaj_tur','succes');
+        ->route('yonetim.sifaris')->with('mesaj','kayit silindi')->With('mesaj_tur','succes');
    }
 }
