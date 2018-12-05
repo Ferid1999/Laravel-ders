@@ -20,7 +20,18 @@ class Anasehifecontroller extends Controller
 
 
             	");
+             $aylara_gore_satislar=DB::select("
+                   SELECT
+                   DATE_FORMAT(si.yaratma_tarixi, '%Y-%m') ay, sum(su.adet) adet
+                   FROM sifaris si
+                   INNER JOIN sepet s ON s.id=si.sepet_id
+                   INNER JOIN sepet_urun su ON s.id=su.sepet_id
+                   
+                   GROUP BY DATE_FORMAT(si.yaratma_tarixi, '%Y-%m')
+                   ORDER BY DATE_FORMAT(si.yaratma_tarixi, '%Y-%m') 
+
+              ");
             
-    	return view('yonetim.anasehife',compact('cok_satan_urunler'));
+    	return view('yonetim.anasehife',compact('cok_satan_urunler','aylara_gore_satislar'));
     }
 }

@@ -53,42 +53,89 @@
                             
 
                         </div>
-                        <canvas id="myChart" width="400" height="400"></canvas>
- 
                     </div>
                     <div class="col-sm-6">
-                       
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Aylara gore satislar</div>
+                            <div class="panel-body">
+                                <canvas id="Chartaylaragoresatis" width="400" height="400"></canvas>
+                            </div>
+                            
+
+                        </div>
  
                     </div>
                 </section>
 @endsection()
 @section('footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+
+
 <script>
-    @php 
-       $labels="";
+   
+   
+ @php 
+     
+        $labels="";
        $data="";
        foreach($cok_satan_urunler as $rapor){
-        $labels.="\"$rapor->urun_adi\", ";
-         $data.=" $rapor->adet, ";
+        $labels .= "\"$rapor->urun_adi\" , ";
+         $data .= " $rapor->adet, ";
        }
+
     @endphp
-var ctx = document.getElementById("Chartcoksatan").getContext('2d');
-var Chartcoksatan = new Chart(ctx, {
+var ctx1 = document.getElementById("Chartcoksatan").getContext('2d');
+var Chartcoksatan = new Chart(ctx1, {
     type: 'horizontalBar',
     data: {
-        labels: [{{!! $labels !!}}],
+        labels: [{!! $labels !!}],
         datasets: [{
             label: '# of Votes',
-            data: [{{!!  $data !!}}],
+            data: [{!!  $data !!}],
            
-            borderColor: 'rgb(255,99132)',
+            borderColor: 'rgb(255,99,132)',
             borderWidth: 1
         }]
     },
     options: {
+        
         scales: {
             xAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    stepSize:1
+                }
+            }]
+        }
+    }
+});
+@php 
+     
+        $labels="";
+       $data="";
+       foreach($aylara_gore_satislar as $rapor){
+        $labels .= "\"$rapor->ay\" , ";
+         $data .= " $rapor->adet, ";
+       }
+
+    @endphp
+var ctx2 = document.getElementById("Chartaylaragoresatis").getContext('2d');
+var Chartaylaragoresatis = new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels: [{!! $labels !!}],
+        datasets: [{
+            label: '# of Votes',
+            data: [{!!  $data !!}],
+           
+            borderColor: '#f4645f',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        
+        scales: {
+            yAxes: [{
                 ticks: {
                     beginAtZero:true,
                     stepSize:1

@@ -28,7 +28,7 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach($urunler_slider as $index=>$urun_detay)
                         <div class="item {{$index==0 ? 'active' : ''}}">
-                            <img src="http://lorempixel.com/640/400/food/1" alt="...">
+                            <img src="{{ $urun_detay->urun_resmi !=null ? asset('uploads/urunler/'.$urun_detay->urun_resmi): 'http://lorempixel.com/400/400/food/1'}}" class="img-responsive" style="min-width: 100%;">
                             <div class="carousel-caption">
                                 {{$urun_detay->urun->urun_adi}}
                             </div>

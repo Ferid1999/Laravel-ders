@@ -34,7 +34,7 @@ class Odemecontroller extends Controller
     }
     public function odemeyap(){
     	$siparis=request()->all();
-    	$siparis['sepet_id']=7;
+    	$siparis['sepet_id']=session('aktif_sepet_id');
     	session('aktif_sepet_id');
     	$siparis['banka']="Garanti";
     	$siparis['taksit_sayisi']=1;
